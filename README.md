@@ -21,8 +21,7 @@ The system is implemented in **ROS2** and deployed on a **Jetson Nano**, leverag
 
 ## 🎥 Demo Video
 
-▶️ [Watch Demo on YouTube](https://youtu.be/37Uw26qA_U4)  
-📁 Or view the video in `finaldemoegr530.M4V`
+▶️ [Watch Demo on YouTube](https://youtu.be/37Uw26qA_U4) 
 
 ---
 
@@ -65,6 +64,20 @@ The system is implemented in **ROS2** and deployed on a **Jetson Nano**, leverag
 
 💡 *Reference: Based on Yahboom’s documentation for HSV color filtering and line following.*
 
+### 🧠 Pseudo Code: Line Following
+
+```pseudo
+initialize_camera()
+initialize_pid_controller()
+
+while robot_is_active:
+    frame = get_camera_frame()
+    blue_mask = apply_HSV_filter(frame)
+    error = calculate_offset_from_center(blue_mask)
+    control_signal = PID.update(error)
+    send_motor_commands(control_signal)
+```
+
 ---
 
 ### 🛑 Traffic Sign Detection using YOLOv5
@@ -80,6 +93,28 @@ The system is implemented in **ROS2** and deployed on a **Jetson Nano**, leverag
 
 💡 *Reference: Adapted from Yahboom’s official YOLOv5 inference guide for Jetson platforms.*
 
+### 🧠 Pseudo Code: Sign detection and response
+
+```pseudo
+load_yolo_model("best.engine")
+start_camera_stream()
+
+while camera_is_open:
+    frame = capture_frame()
+    detections = model.infer(frame)
+
+    if "stop_sign" in detections:
+        halt_movement()
+    elif "go_straight" in detections:
+        maintain_velocity()
+    elif "turn_left" in detections:
+        execute_left_turn()
+    elif "turn_right" in detections:
+        execute_right_turn()
+
+    display_frame_with_detections()
+
+```
 ---
 
 ## 📊 Performance
@@ -144,6 +179,6 @@ This project is shared for academic and educational use. Please credit the team 
 
 **Maintainer**: [Your Name]  
 📧 Email: [sudeekshach@gmail.com]  
-🔗 LinkedIn: [https://linkedin.com/in/yourprofile](https://www.linkedin.com/in/sudeeksha-chagarlamudi/)
+🔗 LinkedIn: [https://www.linkedin.com/in/sudeeksha-chagarlamudi/](https://www.linkedin.com/in/sudeeksha-chagarlamudi/)
 
 
